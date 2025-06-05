@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>DES Encryption Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: vertical;
+            font-family: monospace;
+        }
+        button {
+            background-color: #1976D2;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 16px;
+            transition: background-color 0.2s ease;
+        }
+        button:hover, button:focus {
+            background-color: #135ba1;
+            outline: none;
+        }
+        .output {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            border: 1px solid #d1e7f5;
+            font-family: monospace;
+            font-size: 15px;
+            margin-top: 10px;
+            min-height: 50px;
+            height: auto;
+        }
+
+        .error {
+            color: #b00020;
+            background-color: #fddede;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px solid #b00020;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>DES Encryption & Decryption</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="message">
+            {% if request.POST.action == 'decrypt' %}
+                Enter the encrypted hex string (IV + ciphertext) to decrypt:
+            {% else %}
+                Enter your plaintext message to encrypt:
+            {% endif %}
+        </label>
+        <textarea name="message" id="message" rows="6" required placeholder="{% if request.POST.action == 'decrypt' %}Paste the encrypted hex string here...{% else %}Type your message here...{% endif %}">{{ message|default_if_none:"" }}</textarea>
+
+        <button type="submit" name="action" value="encrypt">Encrypt</button>
+        <button type="submit" name="action" value="decrypt">Decrypt</button>
+
+        {% if encrypted %}
+        <h3>🔒 Encrypted Message (hex):</h3>
+        <div class="output">{{ encrypted }}</div>
+        {% endif %}
+
+        {% if decrypted %}
+        <h3>🔓 Decrypted Message:</h3>
+        <div class="output">{{ decrypted }}</div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">⚠️ {{ error }}</div>
+        {% endif %}
+    </form>
+</div>
+</body>
+</html>
