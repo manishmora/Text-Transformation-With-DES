@@ -15,25 +15,6 @@ This project is a web-based utility for encrypting and decrypting text using the
 
 ---
 
-## 🏗️ Project Structure
-DES_PBL/
-├── app/
-│ ├── templates/
-│ │ └── des_form.html # Main UI template
-│ ├── views.py # Logic to handle encryption/decryption
-│ └── ...
-├── des_encryption/
-│ ├── DESUtility.java # Java class for DES encryption/decryption
-│ ├── input.txt # Temporary file to read user input
-│ └── output.txt # Temporary file for result output
-├── manage.py
-└── README.md
-
----
-
-
----
-
 ## ⚙️ How It Works
 
 1. User inputs a message in the form.
