@@ -37,7 +37,7 @@ This project is a web-based utility for encrypting and decrypting text using the
 ### 2. Clone the Repository
 
 bash
-git clone https://github.com/manishmora/secure-des-web.git
+git clone https://github.com/manishmora/text-transformation-with-des.git
 cd secure-des-web
 
 ### 3. Setup Python Environment
